@@ -8,22 +8,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.poly.test.naversearchstudy.R
-import com.poly.test.naversearchstudy.databinding.LayoutBookItemBinding
+import com.poly.test.naversearchstudy.databinding.LayoutBookSearchItemBinding
 import com.poly.test.naversearchstudy.model.BookData
 
 class BookRecyclerViewAdapter(val context: Activity, val bookList: ArrayList<BookData>) :
     RecyclerView.Adapter<BookRecyclerViewAdapter.BookItemViewHolder>() {
 
 
-    lateinit var binding: LayoutBookItemBinding
+    lateinit var binding: LayoutBookSearchItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
 
-        binding = LayoutBookItemBinding.inflate(LayoutInflater.from(context))
+        binding = LayoutBookSearchItemBinding.inflate(LayoutInflater.from(context))
 
        // val view = LayoutInflater.from(context).inflate(R.layout.layout_book_item, parent, false)
 
-        binding = LayoutBookItemBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = LayoutBookSearchItemBinding.inflate(LayoutInflater.from(context), parent, false)
 
         return BookItemViewHolder(binding)
     }
@@ -38,17 +38,19 @@ class BookRecyclerViewAdapter(val context: Activity, val bookList: ArrayList<Boo
         return bookList.size
     }
 
-    inner class BookItemViewHolder(binding: LayoutBookItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class BookItemViewHolder(binding: LayoutBookSearchItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var view = binding.root
         var bookImg = binding.bookImg
         var bookName = binding.bookName
         var bookAuthor = binding.bookAuthor
+        var bookDescription = binding.bookDescription
 
         fun bindView(bookData: BookData) {
 
             bookName.text = bookData.title
             bookAuthor.text =bookData.author
+            bookDescription.text = bookData.description
 
             Glide.with(context).load(bookData.image)
                 .placeholder(R.drawable.ic_baseline_insert_photo_24)

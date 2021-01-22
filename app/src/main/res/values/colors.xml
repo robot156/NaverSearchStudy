@@ -12,5 +12,7 @@
     <color name="colorGray">#787878</color>
     <color name="colorPink">#EC407A</color>
     <color name="colorLightPink">#FFB3B3</color>
-
+    <color name="color_list_bg">#B6A296</color>
+    <color name="color_book_bg">#A07855</color>
+    <color name="color_book_text">#D4B996</color>
 </resources>

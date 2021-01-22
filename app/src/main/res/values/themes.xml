@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.NaverSearchStudy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/teal_200</item>
-        <item name="colorPrimaryVariant">@color/colorLightGray</item>
+        <item name="colorPrimary">@color/color_book_bg</item>
+        <item name="colorPrimaryVariant">@color/color_book_text</item>
         <item name="colorOnPrimary">#FFF</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

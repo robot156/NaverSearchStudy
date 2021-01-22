@@ -52,14 +52,15 @@ class RetrofitManager {
                                 results.forEach { resultItem ->
 
                                     val resultItemObject = resultItem.asJsonObject
-                                    var title = resultItemObject.get("title").asString
                                     val image = resultItemObject.get("image").asString
+                                    var title = resultItemObject.get("title").asString
                                     var description = resultItemObject.get("description").asString
-                                    val author = resultItemObject.get("author").asString
+                                    var author = resultItemObject.get("author").asString
 
 
-                                    title = title.replace("<b>","").replace("</b>","")
-                                    description = description.replace("<b>","").replace("</b>","")
+                                    title = title.replace("<b>", "").replace("</b>", "").replace("#", "").replace("&", "").replace(";", "")
+                                    description = description.replace("<b>", "").replace("</b>", "").replace("#", "").replace("&", "").replace(";", "")
+                                    author = author.replace("<b>", "").replace("</b>", "").replace("#", "").replace("&", "").replace(";", "")
                                     val searchItem = BookData(
                                             author = author,
                                             description = description,

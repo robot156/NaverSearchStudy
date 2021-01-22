@@ -30,7 +30,9 @@
         android:id="@+id/my_book_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:background="@color/color_list_bg"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/layout_book_search_item">
 
 
     </androidx.recyclerview.widget.RecyclerView>
