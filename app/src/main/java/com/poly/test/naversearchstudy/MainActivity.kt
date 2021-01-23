@@ -6,15 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.google.gson.JsonElement
 import com.poly.test.naversearchstudy.databinding.ActivityMainBinding
 import com.poly.test.naversearchstudy.recyclerview.BookResultActivity
 import com.poly.test.naversearchstudy.retrofit.RetrofitManager
-import com.poly.test.naversearchstudy.utils.API
-import com.poly.test.naversearchstudy.utils.RESPONSE_STATUS
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.poly.test.naversearchstudy.utils.RESPONSE_STATUS.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
                 when (responseStatus) {
 
-                    RESPONSE_STATUS.OKAY -> {
+                    OKAY -> {
 
                         progressUiHidden()
                         val intent = Intent(this, BookResultActivity::class.java)
@@ -48,14 +43,14 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
 
-                    RESPONSE_STATUS.FAIL -> {
+                    FAIL -> {
 
                         Log.d("로그", "실패")
                         progressUiHidden()
                         Toast.makeText(this, "서버 에러", Toast.LENGTH_SHORT).show()
                     }
 
-                    RESPONSE_STATUS.NO_CONTENT -> {
+                    NO_CONTENT -> {
 
                         Log.d("로그", "데이터없음")
                         progressUiHidden()

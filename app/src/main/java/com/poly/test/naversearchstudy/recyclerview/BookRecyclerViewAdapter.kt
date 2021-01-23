@@ -1,5 +1,6 @@
 package com.poly.test.naversearchstudy.recyclerview
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -15,7 +16,7 @@ import com.poly.test.naversearchstudy.databinding.LayoutBookSearchItemBinding
 import com.poly.test.naversearchstudy.model.BookData
 
 class BookRecyclerViewAdapter(val context: Activity, val bookList: ArrayList<BookData>) :
-    RecyclerView.Adapter<BookRecyclerViewAdapter.BookItemViewHolder>() {
+        RecyclerView.Adapter<BookRecyclerViewAdapter.BookItemViewHolder>() {
 
 
     lateinit var binding: LayoutBookSearchItemBinding
@@ -23,8 +24,6 @@ class BookRecyclerViewAdapter(val context: Activity, val bookList: ArrayList<Boo
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
 
         binding = LayoutBookSearchItemBinding.inflate(LayoutInflater.from(context))
-
-       // val view = LayoutInflater.from(context).inflate(R.layout.layout_book_item, parent, false)
 
         binding = LayoutBookSearchItemBinding.inflate(LayoutInflater.from(context), parent, false)
 
@@ -43,13 +42,13 @@ class BookRecyclerViewAdapter(val context: Activity, val bookList: ArrayList<Boo
 
     inner class BookItemViewHolder(binding: LayoutBookSearchItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        var view = binding.root
-        var bookImg = binding.bookImg
-        var bookName = binding.bookName
-        var bookAuthor = binding.bookAuthor
-        var bookDescription = binding.bookDescription
-        var bookPrice = binding.bookPrice
+        private val bookImg = binding.bookImg
+        private val bookName = binding.bookName
+        private val bookAuthor = binding.bookAuthor
+        private val bookDescription = binding.bookDescription
+        private val bookPrice = binding.bookPrice
 
+        @SuppressLint("SetTextI18n")
         fun bindView(bookData: BookData) {
 
             bookName.text = bookData.title

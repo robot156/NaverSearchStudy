@@ -3,7 +3,6 @@ package com.poly.test.naversearchstudy.retrofit
 import android.util.Log
 import com.google.gson.JsonElement
 import com.poly.test.naversearchstudy.model.BookData
-import com.poly.test.naversearchstudy.utils.API
 import com.poly.test.naversearchstudy.utils.API.CLIENT_ID
 import com.poly.test.naversearchstudy.utils.API.CLIENT_KEY
 import com.poly.test.naversearchstudy.utils.ExtensionFunc.formedPrice
