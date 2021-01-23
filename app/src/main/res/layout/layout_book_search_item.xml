@@ -6,7 +6,7 @@
     android:layout_marginHorizontal="15dp"
     android:layout_marginVertical="30dp"
     android:backgroundTint="@color/color_book_bg"
-    android:elevation="20dp"
+    android:elevation="50dp"
     app:cardCornerRadius="20dp">
 
 
@@ -24,11 +24,11 @@
             android:gravity="start"
             android:maxHeight="80dp"
             android:maxLines="2"
-            android:textStyle="bold"
             android:minWidth="80dp"
             android:text="어린 왕자\n생택쥐페리의 역사"
             android:textColor="@color/color_book_text"
             android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/book_description"
             app:layout_constraintEnd_toStartOf="@id/book_img"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
             android:maxLines="3"
             android:text="@string/book_story"
             android:textColor="@color/color_book_text"
-            app:layout_constraintBottom_toTopOf="@id/book_author"
+            app:layout_constraintBottom_toTopOf="@id/label_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/book_img" />
@@ -63,22 +63,44 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/book_author"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/label_layout"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/corner_shape"
-            android:ellipsize="end"
-            android:gravity="center_vertical|left"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:paddingLeft="30dp"
-            android:text="책 작가"
-            android:textColor="@color/color_book_bg"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <TextView
+                android:id="@+id/book_author"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical|left"
+                android:text="책 작가"
+                android:textColor="@color/color_book_bg"
+                android:textSize="13sp"
+                android:maxLines="1"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/book_price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/book_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical|center"
+                android:text="unknown"
+                android:textColor="@color/color_book_bg"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

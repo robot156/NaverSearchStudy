@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import com.google.gson.JsonElement
 import com.poly.test.naversearchstudy.databinding.ActivityMainBinding
 import com.poly.test.naversearchstudy.recyclerview.BookResultActivity
@@ -16,7 +18,7 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mBinding : ActivityMainBinding
+    lateinit var mBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,35 +29,43 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.searchButton.setOnClickListener {
 
+            progressUiShow()
+
             val searchData = mBinding.searchEdit.text
 
-            RetrofitManager.instance.searchBooks(searchText = searchData.toString(), completion = {
-                responseStatus, responseDataArrayList ->
+            RetrofitManager.instance.searchBooks(searchText = searchData.toString(), completion = { responseStatus, responseDataArrayList ->
 
-                when(responseStatus) {
+                when (responseStatus) {
 
                     RESPONSE_STATUS.OKAY -> {
-                        Log.d("로그","성공 ${responseDataArrayList?.size}")
-                        Log.d("로그","작가 ${responseDataArrayList?.get(0)?.author}")
-                        Log.d("로그","설명 ${responseDataArrayList?.get(0)?.description}")
-                        Log.d("로그","타이틀 ${responseDataArrayList?.get(0)?.title}")
-                        Log.d("로그","이미지 ${responseDataArrayList?.get(0)?.image}")
+                        Log.d("로그", "성공 ${responseDataArrayList?.size}")
+                        Log.d("로그", "작가 ${responseDataArrayList?.get(0)?.author}")
+                        Log.d("로그", "설명 ${responseDataArrayList?.get(0)?.description}")
+                        Log.d("로그", "타이틀 ${responseDataArrayList?.get(0)?.title}")
+                        Log.d("로그", "이미지 ${responseDataArrayList?.get(0)?.image}")
+
+
+                        progressUiHidden()
                         val intent = Intent(this, BookResultActivity::class.java)
                         val bundle = Bundle()
                         bundle.putSerializable("book_array_list", responseDataArrayList)
                         intent.putExtra("array_bundle", bundle)
-                        intent.putExtra("search_text",searchData.toString())
+                        intent.putExtra("search_text", searchData.toString())
                         startActivity(intent)
                     }
 
                     RESPONSE_STATUS.FAIL -> {
-                        Log.d("로그","실패")
 
+                        Log.d("로그", "실패")
+                        progressUiHidden()
+                        Toast.makeText(this, "서버 에러", Toast.LENGTH_SHORT).show()
                     }
 
                     RESPONSE_STATUS.NO_CONTENT -> {
-                        Log.d("로그","데이터없음")
 
+                        Log.d("로그", "데이터없음")
+                        progressUiHidden()
+                        Toast.makeText(this, "찾는 책이 없습니다", Toast.LENGTH_SHORT).show()
                     }
 
                 }
@@ -63,8 +73,19 @@ class MainActivity : AppCompatActivity() {
             })
 
         }
-
-
-
     }
+
+
+    private fun progressUiShow() {
+        mBinding.bookLoadingLayout.visibility = View.VISIBLE
+        mBinding.bookProgressbar.visibility = View.VISIBLE
+        mBinding.searchButton.isEnabled = false
+    }
+
+    private fun progressUiHidden() {
+        mBinding.bookLoadingLayout.visibility = View.GONE
+        mBinding.bookProgressbar.visibility = View.GONE
+        mBinding.searchButton.isEnabled = true
+    }
+
 }

@@ -14,8 +14,6 @@ interface NaverBookAPI {
             @Header("X-naver-Client-Id") clientId : String,
             @Header("X-naver-Client-Secret") clientSecret: String,
             @Query("query") query: String
-//            @Query("display") display: Int? = null,
-//            @Query("start") start: Int? = null
     ) : Call<JsonElement>
 
 }

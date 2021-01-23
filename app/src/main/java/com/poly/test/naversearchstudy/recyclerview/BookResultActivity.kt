@@ -35,7 +35,5 @@ class BookResultActivity : AppCompatActivity() {
         binding.myBookRecyclerview.layoutManager = LinearLayoutManager(this)
 
 
-
-
     }
 }

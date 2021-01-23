@@ -6,6 +6,7 @@ import com.poly.test.naversearchstudy.model.BookData
 import com.poly.test.naversearchstudy.utils.API
 import com.poly.test.naversearchstudy.utils.API.CLIENT_ID
 import com.poly.test.naversearchstudy.utils.API.CLIENT_KEY
+import com.poly.test.naversearchstudy.utils.ExtensionFunc.formedPrice
 import com.poly.test.naversearchstudy.utils.RESPONSE_STATUS
 import retrofit2.Call
 import retrofit2.Response
@@ -17,7 +18,7 @@ class RetrofitManager {
     }
 
 
-    private val iRetrofit: NaverBookAPI? = RetrofitClient.getClient(API.BASE_URL)?.create(NaverBookAPI::class.java)
+    private val iRetrofit: NaverBookAPI? = RetrofitClient.getClient()?.create(NaverBookAPI::class.java)
 
 
     fun searchBooks(searchText: String?, completion: (RESPONSE_STATUS, ArrayList<BookData>?) -> Unit) {
@@ -56,16 +57,45 @@ class RetrofitManager {
                                     var title = resultItemObject.get("title").asString
                                     var description = resultItemObject.get("description").asString
                                     var author = resultItemObject.get("author").asString
+                                    val price = resultItemObject.get("price").asString
 
+                                    title = title.replace("<b>", "")
+                                            .replace("</b>", "")
+                                            .replace("#", "")
+                                            .replace("&", "")
+                                            .replace("lt", "")
+                                            .replace("x0D", "")
 
-                                    title = title.replace("<b>", "").replace("</b>", "").replace("#", "").replace("&", "").replace(";", "")
-                                    description = description.replace("<b>", "").replace("</b>", "").replace("#", "").replace("&", "").replace(";", "")
-                                    author = author.replace("<b>", "").replace("</b>", "").replace("#", "").replace("&", "").replace(";", "")
+                                    description = description.replace("<b>", "")
+                                            .replace("</b>", "")
+                                            .replace("#", "")
+                                            .replace("&", "")
+                                            .replace(";", "")
+                                            .replace("x0D", "")
+
+                                    author = author.replace("<b>", "")
+                                            .replace("</b>", "")
+                                            .replace("#", "")
+                                            .replace("&", "")
+                                            .replace(";", "")
+                                            .replace("x0D", "")
+
+                                    var priceText = "unknown"
+
+                                    if(price != "") {
+                                        priceText = price.toInt().formedPrice()
+                                    }
+
+                                    if(author == ""){
+                                        author = "작자 미상"
+                                    }
+
                                     val searchItem = BookData(
                                             author = author,
                                             description = description,
                                             title = title,
-                                            image = image
+                                            image = image,
+                                            price = priceText
                                     )
 
                                     parsedSearchDataArray.add(searchItem)

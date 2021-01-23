@@ -1,12 +1,15 @@
 package com.poly.test.naversearchstudy.recyclerview
 
 import android.app.Activity
-import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.target.Target
 import com.poly.test.naversearchstudy.R
 import com.poly.test.naversearchstudy.databinding.LayoutBookSearchItemBinding
 import com.poly.test.naversearchstudy.model.BookData
@@ -45,6 +48,7 @@ class BookRecyclerViewAdapter(val context: Activity, val bookList: ArrayList<Boo
         var bookName = binding.bookName
         var bookAuthor = binding.bookAuthor
         var bookDescription = binding.bookDescription
+        var bookPrice = binding.bookPrice
 
         fun bindView(bookData: BookData) {
 
@@ -52,9 +56,14 @@ class BookRecyclerViewAdapter(val context: Activity, val bookList: ArrayList<Boo
             bookAuthor.text =bookData.author
             bookDescription.text = bookData.description
 
+            if(bookData.price != "unknown"){
+                bookPrice.text = bookData.price+"원"
+            }
+
             Glide.with(context).load(bookData.image)
-                .placeholder(R.drawable.ic_baseline_insert_photo_24)
-                .into(bookImg)
+                    .placeholder(R.drawable.ic_baseline_insert_photo_24)
+                    .transform(CenterCrop(), RoundedCorners(20))
+                    .into(bookImg)
 
 
 
