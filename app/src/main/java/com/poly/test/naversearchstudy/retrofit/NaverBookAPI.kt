@@ -13,7 +13,8 @@ interface NaverBookAPI {
     fun getSearchBook(
             @Header("X-naver-Client-Id") clientId : String,
             @Header("X-naver-Client-Secret") clientSecret: String,
-            @Query("query") query: String
+            @Query("query") query: String,
+            @Query("display") display: String
     ) : Call<JsonElement>
 
 }

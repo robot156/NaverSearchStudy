@@ -25,7 +25,7 @@ class RetrofitManager {
 
         val search: String = searchText ?: ""
 
-        val call = iRetrofit?.getSearchBook(CLIENT_ID, CLIENT_KEY, search) ?: return
+        val call = iRetrofit?.getSearchBook(CLIENT_ID, CLIENT_KEY, search, "100") ?: return
 
         call.enqueue(object : retrofit2.Callback<JsonElement> {
 
