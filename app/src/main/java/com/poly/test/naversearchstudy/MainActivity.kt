@@ -38,12 +38,6 @@ class MainActivity : AppCompatActivity() {
                 when (responseStatus) {
 
                     RESPONSE_STATUS.OKAY -> {
-                        Log.d("로그", "성공 ${responseDataArrayList?.size}")
-                        Log.d("로그", "작가 ${responseDataArrayList?.get(0)?.author}")
-                        Log.d("로그", "설명 ${responseDataArrayList?.get(0)?.description}")
-                        Log.d("로그", "타이틀 ${responseDataArrayList?.get(0)?.title}")
-                        Log.d("로그", "이미지 ${responseDataArrayList?.get(0)?.image}")
-
 
                         progressUiHidden()
                         val intent = Intent(this, BookResultActivity::class.java)

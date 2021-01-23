@@ -1,5 +1,6 @@
 package com.poly.test.naversearchstudy.retrofit
 
+import android.util.Log
 import com.poly.test.naversearchstudy.utils.API
 import com.poly.test.naversearchstudy.utils.API.BASE_URL
 import okhttp3.Interceptor
@@ -31,7 +32,6 @@ object RetrofitClient {
                 .addInterceptor(headInterceptor)
                 .addInterceptor(httpLoggingInterceptor)
                 .build()
-
 
 
         if(retrofitClient == null) {

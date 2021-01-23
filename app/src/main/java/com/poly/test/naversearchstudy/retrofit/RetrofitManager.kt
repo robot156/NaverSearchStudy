@@ -17,7 +17,6 @@ class RetrofitManager {
         val instance = RetrofitManager()
     }
 
-
     private val iRetrofit: NaverBookAPI? = RetrofitClient.getClient()?.create(NaverBookAPI::class.java)
 
 
@@ -57,7 +56,7 @@ class RetrofitManager {
                                     var title = resultItemObject.get("title").asString
                                     var description = resultItemObject.get("description").asString
                                     var author = resultItemObject.get("author").asString
-                                    val price = resultItemObject.get("price").asString
+                                    var price = resultItemObject.get("price").asString
 
                                     title = title.replace("<b>", "")
                                             .replace("</b>", "")
@@ -80,9 +79,11 @@ class RetrofitManager {
                                             .replace(";", "")
                                             .replace("x0D", "")
 
+
                                     var priceText = "unknown"
 
                                     if(price != "") {
+                                        price = price.toFloat().toInt().toString()
                                         priceText = price.toInt().formedPrice()
                                     }
 
