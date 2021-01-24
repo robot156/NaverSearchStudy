@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.poly.test.naversearchstudy.databinding.ActivityMainBinding
 import com.poly.test.naversearchstudy.recyclerview.BookResultActivity
 import com.poly.test.naversearchstudy.retrofit.RetrofitManager
@@ -13,14 +14,13 @@ import com.poly.test.naversearchstudy.utils.RESPONSE_STATUS.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mBinding: ActivityMainBinding
+    private lateinit var mBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        setContentView(mBinding.root)
 
         mBinding.searchButton.setOnClickListener {
 
@@ -28,39 +28,42 @@ class MainActivity : AppCompatActivity() {
 
             val searchData = mBinding.searchEdit.text
 
-            RetrofitManager.instance.searchBooks(searchText = searchData.toString(), completion = { responseStatus, responseDataArrayList ->
+            RetrofitManager.instance.searchBooks(
+                searchText = searchData.toString(),
+                completion = { responseStatus, responseDataArrayList ->
 
-                when (responseStatus) {
+                    when (responseStatus) {
 
-                    OKAY -> {
+                        OKAY -> {
 
-                        progressUiHidden()
-                        val intent = Intent(this, BookResultActivity::class.java)
-                        val bundle = Bundle()
-                        bundle.putSerializable("book_array_list", responseDataArrayList)
-                        intent.putExtra("array_bundle", bundle)
-                        intent.putExtra("search_text", searchData.toString())
-                        startActivity(intent)
+                            progressUiHidden()
+                            val intent = Intent(this, BookResultActivity::class.java)
+                            val bundle = Bundle()
+                            bundle.putSerializable("book_array_list", responseDataArrayList)
+                            intent.putExtra("array_bundle", bundle)
+                            intent.putExtra("search_text", searchData.toString())
+                            startActivity(intent)
+                        }
+
+                        FAIL -> {
+
+                            Log.d("로그", "실패")
+                            progressUiHidden()
+                            Toast.makeText(this, "서버 에러", Toast.LENGTH_SHORT).show()
+                        }
+
+                        NO_CONTENT -> {
+
+                            Log.d("로그", "데이터없음")
+                            progressUiHidden()
+                            Toast.makeText(this, "찾는 책이 없습니다", Toast.LENGTH_SHORT).show()
+                        }
+
                     }
 
-                    FAIL -> {
+                })
 
-                        Log.d("로그", "실패")
-                        progressUiHidden()
-                        Toast.makeText(this, "서버 에러", Toast.LENGTH_SHORT).show()
-                    }
-
-                    NO_CONTENT -> {
-
-                        Log.d("로그", "데이터없음")
-                        progressUiHidden()
-                        Toast.makeText(this, "찾는 책이 없습니다", Toast.LENGTH_SHORT).show()
-                    }
-
-                }
-
-            })
-
+            mBinding.invalidateAll()
         }
     }
 

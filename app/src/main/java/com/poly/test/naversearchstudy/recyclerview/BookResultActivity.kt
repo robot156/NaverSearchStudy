@@ -2,6 +2,7 @@ package com.poly.test.naversearchstudy.recyclerview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.poly.test.naversearchstudy.R
 import com.poly.test.naversearchstudy.databinding.ActivityBookResultBinding
@@ -10,16 +11,15 @@ import com.poly.test.naversearchstudy.model.BookData
 class BookResultActivity : AppCompatActivity() {
 
 
-    lateinit var binding : ActivityBookResultBinding
+    private lateinit var binding : ActivityBookResultBinding
 
     private var bookList = ArrayList<BookData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityBookResultBinding.inflate(layoutInflater)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_book_result)
 
-        setContentView(binding.root)
 
         val bundle = intent.getBundleExtra("array_bundle")
 
@@ -34,6 +34,7 @@ class BookResultActivity : AppCompatActivity() {
         binding.myBookRecyclerview.adapter = BookRecyclerViewAdapter(this, bookList)
         binding.myBookRecyclerview.layoutManager = LinearLayoutManager(this)
 
+        binding.invalidateAll()
 
     }
 }

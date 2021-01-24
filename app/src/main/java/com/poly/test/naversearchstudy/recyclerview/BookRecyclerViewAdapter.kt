@@ -5,6 +5,7 @@ import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
@@ -18,16 +19,11 @@ import com.poly.test.naversearchstudy.model.BookData
 class BookRecyclerViewAdapter(val context: Activity, val bookList: ArrayList<BookData>) :
         RecyclerView.Adapter<BookRecyclerViewAdapter.BookItemViewHolder>() {
 
-
-    lateinit var binding: LayoutBookSearchItemBinding
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
 
-        binding = LayoutBookSearchItemBinding.inflate(LayoutInflater.from(context))
+        val view = LayoutInflater.from(context).inflate(R.layout.layout_book_search_item, parent, false)
 
-        binding = LayoutBookSearchItemBinding.inflate(LayoutInflater.from(context), parent, false)
-
-        return BookItemViewHolder(binding)
+        return BookItemViewHolder(LayoutBookSearchItemBinding.bind(view))
     }
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
