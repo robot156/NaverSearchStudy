@@ -12,15 +12,11 @@ import com.poly.test.naversearchstudy.recyclerview.BookResultActivity
 import com.poly.test.naversearchstudy.retrofit.RetrofitManager
 import com.poly.test.naversearchstudy.utils.RESPONSE_STATUS.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    private lateinit var mBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
 
         mBinding.searchButton.setOnClickListener {
 

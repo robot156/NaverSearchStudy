@@ -4,21 +4,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.poly.test.naversearchstudy.BaseActivity
 import com.poly.test.naversearchstudy.R
 import com.poly.test.naversearchstudy.databinding.ActivityBookResultBinding
 import com.poly.test.naversearchstudy.model.BookData
 
-class BookResultActivity : AppCompatActivity() {
+class BookResultActivity : BaseActivity<ActivityBookResultBinding>(R.layout.activity_book_result) {
 
 
-    private lateinit var binding : ActivityBookResultBinding
 
     private var bookList = ArrayList<BookData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_book_result)
 
 
         val bundle = intent.getBundleExtra("array_bundle")
@@ -26,15 +25,15 @@ class BookResultActivity : AppCompatActivity() {
         val searchText: String? = intent.getStringExtra("search_text")
 
 
-        binding.topAppBar.title = searchText.toString()
-        setSupportActionBar(binding.topAppBar)
+        mBinding.topAppBar.title = searchText.toString()
+        setSupportActionBar(mBinding.topAppBar)
 
         bookList = bundle?.getSerializable("book_array_list") as ArrayList<BookData>
 
-        binding.myBookRecyclerview.adapter = BookRecyclerViewAdapter(this, bookList)
-        binding.myBookRecyclerview.layoutManager = LinearLayoutManager(this)
+        mBinding.myBookRecyclerview.adapter = BookRecyclerViewAdapter(this, bookList)
+        mBinding.myBookRecyclerview.layoutManager = LinearLayoutManager(this)
 
-        binding.invalidateAll()
+        mBinding.invalidateAll()
 
     }
 }
